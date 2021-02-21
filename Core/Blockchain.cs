@@ -8,11 +8,13 @@ namespace BlockchainCore
     public class Blockchain
     {
         public List<Block> blockchain;
+        public int difficulty { get; set; }
 
         public Blockchain()
         {
             blockchain = new List<Block>();
             blockchain.Add(createGenesisBlock());
+            difficulty = 4;
         }
 
         private Block createGenesisBlock()
@@ -28,7 +30,7 @@ namespace BlockchainCore
         public void addBlock(Block newBlockToAdd)
         {
             newBlockToAdd.PrevHash = getLatestBlock().Hash;
-            newBlockToAdd.Hash = newBlockToAdd.CalculateHash();
+            newBlockToAdd.mineBlock(difficulty);
             blockchain.Add(newBlockToAdd);
         }
 

@@ -17,7 +17,7 @@ namespace BlockchainCore.Models
         public int Amount { get; set; }
         public DateTime Timestamp { get; set; }
 
-        public string CalculateHash()
+        private string CalculateHash()
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {
