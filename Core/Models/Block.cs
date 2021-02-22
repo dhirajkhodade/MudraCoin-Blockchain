@@ -37,14 +37,14 @@ namespace BlockchainCore.Models
             }
         }
 
-        public void mineBlock(int difficulty)
+        public void MineBlock(int difficulty)
         {
             while (Hash.Substring(0, difficulty) != "".PadRight(difficulty, '0'))
             {
                 Nonce++;
                 Hash = CalculateHash();
             }
-            Console.WriteLine("Block mined: " + Hash);
+            Console.WriteLine("Block successfully mined: " + Hash);
         }
     }
 }

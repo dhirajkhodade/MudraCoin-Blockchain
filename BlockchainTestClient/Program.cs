@@ -38,16 +38,22 @@ namespace BlockchainTestClient
             */
 
 
+            // Mining reward implementation
+
             var mudraCoin = new Blockchain();
 
-            Console.WriteLine($"Mining Block 1... With Proof-of-Work Difficulty {mudraCoin.difficulty}");
-            mudraCoin.addBlock(new Block(DateTime.UtcNow, new List<Transaction>() { new Transaction("Shivaji", "Bajiprabhu", 10) }));
+            mudraCoin.CreateTransaction(new Transaction("Shivaji", "Bajiprabhu", 10));
+            mudraCoin.CreateTransaction(new Transaction("Tanaji", "Dadaji", 20));
+            mudraCoin.CreateTransaction(new Transaction("Shahaji", "Yesaji", 30));
 
-            Console.WriteLine($"Mining Block 2... With Proof-of-Work Difficulty {mudraCoin.difficulty}");
-            mudraCoin.addBlock(new Block(DateTime.UtcNow, new List<Transaction>() { new Transaction("Tanaji", "Dadaji", 10) }));
+            Console.WriteLine("Starting the miner..!");
+            mudraCoin.MinePendingTransactions("Manjhi-TheMiner");
 
-            Console.WriteLine($"Mining Block 3... With Proof-of-Work Difficulty {mudraCoin.difficulty}");
-            mudraCoin.addBlock(new Block(DateTime.UtcNow, new List<Transaction>() { new Transaction("Shahaji", "Yesaji", 10) }));
+            Console.WriteLine($"Balance of the 'Manjhi-TheMiner' is {mudraCoin.GetBalance("Manjhi-TheMiner")}");
+
+            Console.WriteLine("Starting the miner..!");
+            mudraCoin.MinePendingTransactions("Manjhi-TheMiner");
+            Console.WriteLine($"Balance of the 'Manjhi-TheMiner' is {mudraCoin.GetBalance("Manjhi-TheMiner")}");
         }
     }
 }
