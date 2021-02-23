@@ -46,5 +46,15 @@ namespace BlockchainCore.Models
             }
             Console.WriteLine("Block successfully mined: " + Hash);
         }
+
+        public bool HasValidTransactions()
+        {
+            foreach (var tx in Transactions)
+            {
+                if (!tx.IsValid())
+                    return false;
+            }
+            return true;
+        }
     }
 }

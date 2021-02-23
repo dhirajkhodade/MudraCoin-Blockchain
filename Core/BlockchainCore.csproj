@@ -6,5 +6,9 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Utilities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Secp256k1.Net" Version="0.1.55" />
   </ItemGroup>
 </Project>

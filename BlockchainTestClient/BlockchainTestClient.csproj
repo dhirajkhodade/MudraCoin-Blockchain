@@ -8,4 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Core\BlockchainCore.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Secp256k1.Native" Version="0.1.20" />
+  </ItemGroup>
 </Project>

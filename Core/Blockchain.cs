@@ -33,16 +33,27 @@ namespace BlockchainCore
 
         public void MinePendingTransactions(string minersAddressForReward)
         {
-            var newBlock = new Block(DateTime.UtcNow,PendingTransactions);
+            //lets slide in reward transaction to give the miner minning reward
+            var rewardTx = new Transaction("System", minersAddressForReward, MiningReward);
+            PendingTransactions.Add(rewardTx);
+
+            var newBlock = new Block(DateTime.UtcNow,PendingTransactions,GetLatestBlock().Hash);
             newBlock.MineBlock(Difficulty);
+
             Chain.Add(newBlock);
 
-            //lets slide in new transaction to give the miner minning reward
-            PendingTransactions = new List<Transaction>() { (new Transaction("System", minersAddressForReward, MiningReward)) };
+            //Clear pending transactions pool
+            PendingTransactions = new List<Transaction>();
         }
 
-        public void CreateTransaction(Transaction transaction)
+        public void AddTransactionToPool(Transaction transaction)
         {
+            if (string.IsNullOrEmpty(transaction.FromAddress) & string.IsNullOrEmpty(transaction.ToAddress))
+                throw new Exception("From and To address missing..!");
+
+            if(!transaction.IsValid())
+                throw new Exception("Invalid Transaction: invalid or missing signeture.");
+
             PendingTransactions.Add(transaction);
         }
 
@@ -72,6 +83,9 @@ namespace BlockchainCore
             {
                 var currentBlock = Chain.ElementAt(i);
                 var prevBlock = Chain.ElementAt(i - 1);
+
+                if (!currentBlock.HasValidTransactions())
+                    return false;
 
                 if (!currentBlock.Hash.Equals(currentBlock.CalculateHash()))
                     return false;
