@@ -26,15 +26,20 @@ namespace BlockchainCore
             return new Block(new DateTime(1,1,1,1,1,1,1),new List<Transaction>(),"0");
         }
 
-        public Block GetLatestBlock()
+        private Block GetLatestBlock()
         {
             return Chain.LastOrDefault();
+        }
+
+        public List<Block> GetBlockchain()
+        {
+            return Chain;
         }
 
         public void MinePendingTransactions(string minersAddressForReward)
         {
             //lets slide in reward transaction to give the miner minning reward
-            var rewardTx = new Transaction("System", minersAddressForReward, MiningReward);
+            var rewardTx = new Transaction("MiningRewardSystem", minersAddressForReward, MiningReward);
             PendingTransactions.Add(rewardTx);
 
             var newBlock = new Block(DateTime.UtcNow,PendingTransactions,GetLatestBlock().Hash);

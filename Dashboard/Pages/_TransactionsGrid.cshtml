@@ -1,0 +1,37 @@
+﻿@model List<TransactionDto>
+@using Dashboard.Models
+@using Microsoft.Toolkit.Extensions
+@{
+}
+<div style="line-height: 0.7">
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td title="@(i+1)">@(i+1)</td>
+                    <td title="@Model[i].FromAddress">@(Model[i].FromAddress.Length > 20 ? Model[i].FromAddress.Truncate(20)+"..." : Model[i].FromAddress)</td>
+                    <td title="@Model[i].ToAddress">@(Model[i].ToAddress.Length > 20 ? @Model[i].ToAddress.Truncate(20)+"..." : @Model[i].ToAddress)</td>
+                    <td title="@Model[i].Amount">@Model[i].Amount</td>
+                    <td title="@Model[i].Timestamp">@Model[i].Timestamp</td>
+                </tr>
+            }
+            @if (Model.Count.Equals(0))
+            {
+                <tr>
+                    <td colspan="5" class="text-center">This is Genesis Block, it has no transactions.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

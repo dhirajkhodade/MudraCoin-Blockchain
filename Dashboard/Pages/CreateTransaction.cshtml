@@ -1,0 +1,72 @@
+﻿@page
+@model Dashboard.Pages.CreateTransactionModel
+@{
+}
+
+<div>
+@{
+if (!string.IsNullOrEmpty(Model.Message))
+{
+<div class="alert alert-success" id="success-alert">
+<button type="button" class="close" data-dismiss="alert">x</button>
+<strong>@Model.Message ! </strong>
+</div>
+}
+}
+<div class="modal-content">
+<div class="modal-header">
+<h5>New Transaction</h5>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-md-8 item_content">
+<form method="post">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="col-md-12" style="margin-top:15px;">
+                        <label asp-for="TransactionToCreate.FromAddress" style="font-weight:bold;"></label>
+                        <input type='text' class='form-control' readonly asp-for="MyWalletAddress" />
+                        <span class="alert-danger" asp-validation-for="TransactionToCreate.FromAddress"></span>
+                    </div>
+                    <div class="col-md-12" style="margin-top:15px;">
+                        <label asp-for="TransactionToCreate.ToAddress" style="font-weight:bold;"></label>
+                        <input type='text' class='form-control' asp-for="TransactionToCreate.ToAddress" />
+                        <span class="alert-danger"
+                                asp-validation-for="TransactionToCreate.ToAddress"></span>
+                    </div>
+                    <div class="col-md-12" style="margin-top:15px;">
+                        <label asp-for="TransactionToCreate.Amount" style="font-weight:bold;"></label>
+                        <input type='text' class='form-control' asp-for="TransactionToCreate.Amount" />
+                        <span class="alert-danger"
+                                asp-validation-for="TransactionToCreate.Amount"></span>
+                    </div>
+                    <div class="text-center col-md-12" style="margin-top:35px;">
+                        <button class="btn btn-primary btn-sx" id="create-tx-btn" type="submit">
+                            <i class="glyphicon glyphicon-plus"></i> Sign & Create Transaction
+                        </button>
+                        <a class="btn btn-primary btn-sx" asp-page="/PendingTransactions">
+                            <i class="glyphicon glyphicon-backward"></i> Pending Transactions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+@section Scripts {
+<script>
+    
+</script>
+}

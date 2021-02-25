@@ -1,10 +1,64 @@
 ﻿@page
+@using Microsoft.Toolkit.Extensions
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "MudraCoin";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <h5 class="display-5">Blockchain Explorer</h5>
+    <p>Learn about <a href="https://github.com/dhirajkhodade/MudraCoin-Blockchain">Blockchain</a>. Create new signed transactions add it to the block and mine those blocks..!</p>
 </div>
+@{
+    if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="alert alert-success" id="success-alert">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>@Model.Message ! </strong>
+        </div>
+    }
+}
+<div class="container horizontal-scrollable">
+    <div class="row flex-nowrap">
+        @for (int i = 0; i < Model.Blockchain.Count; i++)
+        {
+            <div class="col-3">
+                <div class="card" style="width: 16rem;cursor:pointer" id="@i">
+                    <div class="card-header mb-0 font-weight-bold">
+                        Block @i
+                        @if (i == 0)
+                        {
+                            <span class="card-text text-muted" style="font-size:smaller;font-weight:400">(Genesis Block)</span>
+                        }
+                    </div>
+                    <div class="card-body mb-0" style="font-size:small">
+                        <blockquote class="mb-0">
+                            <p class="card-text mb-0">Timestamp</p>
+                            <footer class="blockquote-footer mb-0">@Model.Blockchain[i].Timestamp</footer>
+                        </blockquote>
+                        <hr class="mb-0" />
+                        <blockquote class="mb-0">
+                            <p class="card-text mb-0">Hash of previous block</p>
+                            <footer class="blockquote-footer mb-0" title="@Model.Blockchain[i].PrevHash">@(Model.Blockchain[i].PrevHash.Length > 20 ? Model.Blockchain[i].PrevHash.Truncate(20) + "..." : Model.Blockchain[i].PrevHash)</footer>
+                        </blockquote>
+                        <hr class="mb-0" />
+                        <blockquote class="mb-0">
+                            <p class="card-text mb-0">Hash</p>
+                            <footer class="blockquote-footer mb-0" title="@Model.Blockchain[i].Hash">@(Model.Blockchain[i].Hash.Length > 20 ? Model.Blockchain[i].Hash.Truncate(20) + "..." : Model.Blockchain[i].Hash)</footer>
+                        </blockquote>
+                        <hr class="mb-0" />
+                        <blockquote class="mb-0">
+                            <p class="card-text mb-0">Nonce</p>
+                            <footer class="blockquote-footer mb-0">@Model.Blockchain[i].Nonce</footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+
+<h5>Transactions inside block <span id="tx-block-no"></span> </h5>
+<div class="container" id="transactions-grid"></div>
+

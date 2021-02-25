@@ -1,0 +1,54 @@
+﻿@page
+@model Dashboard.Pages.PendingTransactionsModel
+@using Microsoft.Toolkit.Extensions
+@{
+}
+
+<div>
+<h5 class="display-5">Pending Transactions</h5>
+</div>
+
+<div style="line-height: 0.7">
+
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.PendingTransactions.Count; i++)
+        {
+            <tr>
+                <td title="@(i+1)">@(i+1)</td>
+                <td title="@Model.PendingTransactions[i].FromAddress">@(Model.PendingTransactions[i].FromAddress.Length > 20 ? Model.PendingTransactions[i].FromAddress.Truncate(20)+"..." : Model.PendingTransactions[i].FromAddress)</td>
+                <td title="@Model.PendingTransactions[i].ToAddress">@(Model.PendingTransactions[i].ToAddress.Length > 20 ? @Model.PendingTransactions[i].ToAddress.Truncate(20)+"..." : @Model.PendingTransactions[i].ToAddress)</td>
+                <td title="@Model.PendingTransactions[i].Amount">@Model.PendingTransactions[i].Amount</td>
+                <td title="@Model.PendingTransactions[i].Timestamp">@Model.PendingTransactions[i].Timestamp</td>
+            </tr>
+        }
+        @if (Model.PendingTransactions.Count.Equals(0))
+        {
+            <tr>
+                <td colspan="5" class="text-center">There are no pending transactions.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+
+<div>
+    @if (@ViewData["TxPoolCount"] as string != string.Empty)
+    {
+        <form method="POST">
+            <button class="btn btn-primary btn-sx" asp-page-handler="StartMining" type="submit">
+                <i class="glyphicon glyphicon-plus"></i> Start Mining
+            </button>
+        </form>
+    }
+
+</div>
