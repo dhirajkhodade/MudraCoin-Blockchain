@@ -1,12 +1,13 @@
 ﻿@page
 @model Dashboard.Pages.CreateTransactionModel
 @{
+    ViewData["Title"] = "MudraCoin";
 }
 
 <div>
 @{
-if (!string.IsNullOrEmpty(Model.Message))
-{
+    if (!string.IsNullOrEmpty(Model.Message))
+    {
 <div class="alert alert-success" id="success-alert">
 <button type="button" class="close" data-dismiss="alert">x</button>
 <strong>@Model.Message ! </strong>
