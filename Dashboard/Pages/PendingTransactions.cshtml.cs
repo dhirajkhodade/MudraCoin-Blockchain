@@ -4,6 +4,7 @@ using Dashboard.Interfaces;
 using Dashboard.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Dashboard.Pages
@@ -12,12 +13,13 @@ namespace Dashboard.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IBlockchainService _blockchainService;
-        private string _myWalletAddress { get; } = "7a89dec4cc7e0964ed4c5e517f1cfee7e4f145e8500f55fe0317f97e71b7ba5219a4215b1885ac547da87bd0155d02c9bbe0501d0670a4f481df2b42f2130c02";
+        private readonly IConfiguration _configuration;
 
-        public PendingTransactionsModel(ILogger<IndexModel> logger, IBlockchainService blockchainService)
+        public PendingTransactionsModel(ILogger<IndexModel> logger, IBlockchainService blockchainService, IConfiguration configuration)
         {
             _logger = logger;
             _blockchainService = blockchainService;
+            _configuration = configuration;
         }
 
         public List<TransactionDto> PendingTransactions { get; set; }
@@ -34,7 +36,7 @@ namespace Dashboard.Pages
 
         public async Task<IActionResult> OnPostStartMining()
         {
-            await _blockchainService.MinePendingTransactions(_myWalletAddress);
+            await _blockchainService.MinePendingTransactions(_configuration.GetSection("AppConfig")["MyWalletAddress"]);
             Message = "Mining Started..!";
             return RedirectToPage("/Index");
         }

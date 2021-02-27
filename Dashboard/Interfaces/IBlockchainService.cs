@@ -12,5 +12,6 @@ namespace Dashboard.Interfaces
         Task<bool> IsBlockchainValid();
         Task<List<BlockDto>> GetBlockchain();
         Task<List<TransactionDto>> GetPendingTransactions();
+        Task<WalletDetailsDto> GetWalletDetails(string walletAddress);
     }
 }

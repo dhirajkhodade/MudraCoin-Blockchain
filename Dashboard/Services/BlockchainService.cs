@@ -7,6 +7,7 @@ using BlockchainCore.Models;
 using Dashboard.Interfaces;
 using Dashboard.Models;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace Dashboard.Services
 {
@@ -47,7 +48,7 @@ namespace Dashboard.Services
 
         public async Task<List<BlockDto>> GetBlockchain()
         {
-            return _mapper.Map<List<BlockDto>>(await Task<List<BlockchainCore.Models.Block>>.Factory.StartNew(() => _blockchain.GetBlockchain()));
+            return _mapper.Map<List<BlockDto>>(await Task<List<Block>>.Factory.StartNew(() => _blockchain.GetBlockchain()));
         }
 
         public async Task<List<TransactionDto>> GetPendingTransactions()
@@ -55,5 +56,16 @@ namespace Dashboard.Services
             return _mapper.Map<List<TransactionDto>>(await Task<List<Transaction>>.Factory.StartNew(() => _blockchain.PendingTransactions));
         }
 
+        public async Task<WalletDetailsDto> GetWalletDetails(string walletAddress)
+        {
+            var walletDetails = new WalletDetailsDto();
+            walletDetails.Balance = await GetBalance(walletAddress);
+
+            var chain = await GetBlockchain();
+            walletDetails.Transactions = chain.SelectMany(block => block.Transactions)
+                                              .Where(tx => tx.FromAddress.Equals(walletAddress) || tx.ToAddress.Equals(walletAddress)).ToList();
+            walletDetails.WalletAddress = walletAddress;
+            return walletDetails;
+        }
     }
 }

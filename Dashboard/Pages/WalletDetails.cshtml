@@ -1,0 +1,37 @@
+﻿@page
+@model Dashboard.Pages.WalletDetailsModel
+@{
+ViewData["Title"] = "MudraCoin";
+}
+
+<div class="modal-content">
+<div class="modal-header">
+<h5>Wallet Details</h5>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-md-8 item_content">
+<div class="container">
+<div class="row">
+<div class="col-md-8">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="col-md-12" style="margin-top:15px;">
+                <label asp-for="@Model.WalletDetails.WalletAddress" style="font-weight:bold;"></label>
+                <label style="word-wrap: break-word; width: 1000px"> @Model.WalletDetails.WalletAddress </label>
+            </div>
+            <div class="col-md-12" style="margin-top:15px;">
+                <label asp-for="@Model.WalletDetails.Balance" style="font-weight:bold;"></label>
+                <label> @Model.WalletDetails.Balance </label>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<br />
+<partial name="_TransactionsGrid" model="Model.WalletDetails.Transactions" />
