@@ -67,5 +67,16 @@ namespace Dashboard.Services
             walletDetails.WalletAddress = walletAddress;
             return walletDetails;
         }
+
+        public void ApplySettings(SettingsDto settings)
+        {
+            _blockchain.Difficulty = settings.MiningDifficulty;
+            _blockchain.MiningReward = settings.MiningReward;
+        }
+
+        public SettingsDto GetCurrentSettings()
+        {
+            return new SettingsDto() { MiningReward = _blockchain.MiningReward, MiningDifficulty = _blockchain.Difficulty };
+        }
     }
 }

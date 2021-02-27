@@ -1,0 +1,46 @@
+﻿@page
+@model Dashboard.Pages.SettingsModel
+@{
+}
+
+
+<div class="modal-content">
+<div class="modal-header">
+<h5>Block</h5>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-md-8 item_content">
+<form method="post">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="col-md-12" style="margin-top:15px;">
+                        <label asp-for="Settings.MiningDifficulty" style="font-weight:bold;"></label>
+                        <input type='text' class='form-control' asp-for="Settings.MiningDifficulty" />
+                        <span class="alert-danger" asp-validation-for="Settings.MiningDifficulty"></span>
+                    </div>
+                    <div class="col-md-12" style="margin-top:15px;">
+                        <label asp-for="Settings.MiningReward" style="font-weight:bold;"></label>
+                        <input type='text' class='form-control' asp-for="Settings.MiningReward" />
+                        <span class="alert-danger"
+                                asp-validation-for="Settings.MiningReward"></span>
+                    </div>
+                    <div class="text-center col-md-12" style="margin-top:35px;">
+                        <button class="btn btn-primary btn-sx" id="create-tx-btn" type="submit">
+                            <i class="glyphicon glyphicon-plus"></i> Apply Setting
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>

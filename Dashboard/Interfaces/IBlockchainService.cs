@@ -10,6 +10,8 @@ namespace Dashboard.Interfaces
         Task SignAndCreateTransaction(TransactionDto transaction, string secretKey);
         Task<double> GetBalance(string address);
         Task<bool> IsBlockchainValid();
+        void ApplySettings(SettingsDto settings);
+        SettingsDto GetCurrentSettings();
         Task<List<BlockDto>> GetBlockchain();
         Task<List<TransactionDto>> GetPendingTransactions();
         Task<WalletDetailsDto> GetWalletDetails(string walletAddress);
