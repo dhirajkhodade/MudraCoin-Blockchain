@@ -6,12 +6,16 @@
     <title>@ViewData["Title"]-Blockchain</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index" style="font-weight:bold;font-size:large">MudraCoin</a>
+                <a class="navbar-brand navbar-left" asp-area="" asp-page="/Index" style="font-weight:bold;font-size:large;text-align:left">
+                    <img class="navbar-left" style="max-width:6%" src="~/logo.png">
+                    MudraCoin
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
