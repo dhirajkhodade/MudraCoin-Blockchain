@@ -1,6 +1,8 @@
 # MudraCoin-Blockchain
 This is simple blockchain implementation in C# and UI in aspnet core razor pages.
 
+Check out my medium post for detailed explaination about this code - [Post](https://dhirajkhodade.medium.com/blockchain-explained-using-c-implementation-5482dc980c47)
+
 # Features 
 - Create Blockchain
 - Mining Rewards & Transactions
