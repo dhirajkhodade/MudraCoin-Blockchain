@@ -29,7 +29,7 @@ For that goto Dashboard directory and run below command to build docker image
 and then run the image and access it from browser - http://localhost:8080
 
 ```
-docker run -p 8080:80 dhirajkhodade/mudracoin-blockchain-app
+docker run -p 8080:80 [your docker id]/mudracoin-blockchain-app
 ```
 
 
