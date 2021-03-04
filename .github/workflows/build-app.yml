@@ -21,5 +21,3 @@ jobs:
       run: dotnet restore MudraCoin.sln
     - name: Build
       run: dotnet build MudraCoin.sln --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
